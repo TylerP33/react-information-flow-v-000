@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { getReducedColor } from './randomColorGenerator.js'
+import { getReducedColor, getRandomColor } from './randomColorGenerator.js'
 import Tier3 from './Tier3'
 
 
@@ -12,13 +12,18 @@ export default class Tier2 extends Component {
     }
   }
 
+  handleGrand = (e) => {
+    e.stopPropagation();
+    e.target.style.backgroundColor = getReducedColor(getRandomColor())
+  }
+
   render() {
     // hard coded color values have been added below, though they won't be
     // present in our solution. What should they be replaced with?
     return (
-      <div className="tier2" style={{backgroundColor: this.props.color, color: this.props.color}}>
-        <Tier3 color={this.props.childColor} />
-        <Tier3 color={this.props.childColor} />
+      <div onClick={this.props.handleChildClick} className="tier2" style={{backgroundColor: this.props.color, color: this.props.color}}>
+        <Tier3 color= { this.props.color } handleGrand={this.handleGrand} />
+        <Tier3 color= { this.props.color } handleGrand={this.handleGrand} />
       </div>
     )
   }
